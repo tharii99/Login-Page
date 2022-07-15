@@ -21,7 +21,7 @@ const Logpage = () => {
         id='password'
         name='password'
         type='password'
-        placeholder='********'
+        placeholder='*********'
       />
         </div>
 
