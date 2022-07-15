@@ -1,0 +1,34 @@
+
+
+.formInputArea{
+    height: 20px;
+    width: 400px;
+}
+
+.formContent{
+    max-width: 30%;
+    margin: 10% auto;
+    overflow: auto;
+    min-height: 300px;
+    border: 1px solid rgb(76, 97, 114);
+    padding: 30px;
+    border-radius: 5px;
+}
+
+.formHeading{
+    margin-top: 12px;
+    font-style: bold;
+}
+
+.formInput{
+    margin-top: 13%;
+}
+
+.btn{
+    background-color: aqua;
+    
+}
+
+.css-1p4qcy4{
+    margin-top: 15%;
+}
