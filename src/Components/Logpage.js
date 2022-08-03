@@ -1,9 +1,24 @@
-import React from 'react'
-import { Button } from 'rebass'
+import React, { useState } from 'react'
+import { Button, Box } from 'rebass'
 import { Input } from '@rebass/forms'
-import { Route, Routes } from 'react-router-dom'
 
 const Logpage = () => {
+
+  const [mail, setMail] = useState('');       //Mail
+  const [Pass, setPass] = useState('');       //Password
+
+  const change = (e) => {
+    setMail(e.target.value);
+  };
+
+  const passChange = (e) => {
+    setPass(e.target.value);
+  };
+
+  const show = (e) => {
+    alert(mail + ' ' + Pass);
+  };
+
   return (
     <form className='formContent'>
       <h2 className='formHeading'>Login to pick a challenge</h2>
@@ -13,7 +28,8 @@ const Logpage = () => {
           id='email'
           name='email'
           type='email'
-          placeholder='jane@example.com'
+          onChange={change}
+          placeholder='janeDoe@Something.com'
         />
       </div>
 
@@ -22,19 +38,14 @@ const Logpage = () => {
           id='password'
           name='password'
           type='password'
+          onChange={passChange}
           placeholder='***********'
         />
       </div>
-        <Button variant='primary' className='btn' >Login</Button>
+      <Button variant='primary' className='btn' onClick={show}>Login</Button>
     </form>
 
   )
-
-  // function show (){
-  //   <Routes>
-  //       <Route path="/" element={<Logpage />}></Route>
-  //   </Routes>
-  // }
 }
 
 export default Logpage
