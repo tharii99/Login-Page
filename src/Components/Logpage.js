@@ -19,6 +19,8 @@ const Logpage = () => {
     alert(mail + ' ' + Pass);
   };
 
+  //form
+
   return (
     <form className='formContent'>
       <h2 className='formHeading'>Login to pick a challenge</h2>
