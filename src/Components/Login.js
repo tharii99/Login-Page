@@ -42,6 +42,7 @@ export default function Logpage({ setToken }) {
             <div className='formInput'>
                 <Input
                     id='email'
+                    data-testid='email'
                     name='email'
                     type='email'
                     onChange={e => setMail(e.target.value)}
@@ -52,13 +53,14 @@ export default function Logpage({ setToken }) {
             <div className='formInput'>
                 <Input
                     id='password'
+                    data-testid='password'
                     name='password'
                     type='password'
                     onChange={e => setPass(e.target.value)}
                     placeholder='***********'
                 />
             </div>
-            <Button variant='primary' className='btn' type='submit'>Login</Button>
+            <Button variant='primary' data-testid='button' className='btn' type='submit'>Login</Button>
         </form>
 
     )

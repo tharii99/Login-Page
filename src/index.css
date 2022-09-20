@@ -43,3 +43,8 @@
     padding: 30px;
     border-radius: 5px;
 }
+
+.boxLayer p{
+    margin: 10%;
+    font-weight: bold;
+}

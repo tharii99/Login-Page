@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './index.css';
 import Logpage from './Components/Login';
-import Aftersign from './Components/Aftersign';
+// import Aftersign from './Components/Aftersign';
 import Dashboard from './Components/Dashboard';
 
 

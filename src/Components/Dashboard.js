@@ -11,6 +11,9 @@ const Dashboard = () => {
                     color='primary'>
                     INFORMATION
                 </Text>
+                <p>Email Address : admin@circles.asia</p>
+                <p>Name : Circles</p>
+                <p>Location : Colombo</p>
             </div>
         </div>
     )
