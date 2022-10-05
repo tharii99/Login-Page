@@ -25,7 +25,7 @@ export default function Logpage({ setToken }) {
     const handleSubmit = async e => {
 
         e.preventDefault();
-        // if (mail == 'admin@circles.asia' && Pass == 'cc') {
+        
         const result = await loginUser({
             email: mail,
             password: Pass
@@ -44,7 +44,7 @@ export default function Logpage({ setToken }) {
 
         setToken(responseBody.token);
     }
-    // }
+    
 
     return (
         <form className='formContent' onSubmit={handleSubmit} action="/login" method="post">
