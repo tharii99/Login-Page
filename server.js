@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { request } = require('express');
 const app = express();
+const moment = require('moment');
 const bodyParser = require('body-parser'); // middleware
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
@@ -12,37 +13,25 @@ app.use(cors());
 app.post('/login', (req, res) => {
   let u_Email = req.body.email;
   let u_Password = req.body.password;
+  
 
   console.log(" checking Postman",{u_Email,u_Password},req.body)
-  if(u_Email == 'admin@circles.asia' && u_Password == 'cc'){
-    res.send({
-      token: 'success'
-    })
+  if(u_Email == 'admin@hello.world' && u_Password == 'cc'){
+    console.log("HTTP Status : ",res.statusCode)
+    
+    res.status(200).send({
+      token : 'Success',
+      Time : moment().format("MMM Do YY")
+    })  
   }
   else{
-    res.send({
-      token: 'Unsuccesful try again'
+    console.log("HTTP Status : ",res.statusCode)
+    res.status(400).send({
+      message : 'Unsuccesful try again',
+      token : ''
     })
   }
 
-
-  // app.get('/login', (req, res) => {
-//   res.send({
-//     token: 'a_guid'
-//   });
-// });
-
-// app.post('/login', (req, res) => {
-//   res.send({
-//     token: 'success'
-//   })
-//   console.log("GG")
-// });
-
-  // res.send({
-  //   'email': u_Email,
-  //   'password': u_Password
-  // });
 })
 
 

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 
 async function loginUser(credentials) {
+    console.log('Inside the login User function')
     return fetch('http://localhost:8080/login', {
         method: 'POST',
         headers: {
@@ -12,7 +13,6 @@ async function loginUser(credentials) {
         },
         body: JSON.stringify(credentials)
     })
-        .then(data => data.json())
 }
 
 export default function Logpage({ setToken }) {
@@ -25,15 +25,26 @@ export default function Logpage({ setToken }) {
     const handleSubmit = async e => {
 
         e.preventDefault();
-        if (mail == 'admin@circles.asia' && Pass == 'cc') {
-            const token = await loginUser({
-                email:mail,
-                password:Pass
-            });
+        // if (mail == 'admin@circles.asia' && Pass == 'cc') {
+        const result = await loginUser({
+            email: mail,
+            password: Pass
+        });
+        const status = result.status;
+        const responseBody = await result.json()
 
-            setToken(token);
+        console.log('token : ', { status, responseBody })
+
+
+        if (result.status == 200) {
+            console.log('booom')
+        } else {
+            console.log('sad')
         }
+
+        setToken(responseBody.token);
     }
+    // }
 
     return (
         <form className='formContent' onSubmit={handleSubmit} action="/login" method="post">
@@ -60,7 +71,7 @@ export default function Logpage({ setToken }) {
                     placeholder='***********'
                 />
             </div>
-            <Button variant='primary' data-testid='button' className='btn' type='submit'>Login</Button>
+            <Button variant='primary' data-testid='login-button' className='btn' type='submit'>Login</Button>
         </form>
 
     )
