@@ -3,14 +3,12 @@
  */
 
 
-import { fireEvent, getAllByTestId, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Logpage from './Login'
 import React from 'react'
-import { ReactDOM } from 'react-dom'
 import '@testing-library/jest-dom'
-import Dashboard from './Dashboard'
-import { func } from 'prop-types'
+import { response } from 'express'
 
 
 describe('Login page', () => {
@@ -83,12 +81,6 @@ describe('Login page', () => {
         fireEvent.change(passwordField, { target: { value: 'cc' } })
         userEvent.click(screen.getByTestId('login-button'))
         expect(screen.getByTestId('login-button')).toBeChecked
-        // expect(screen.getByTestId('button')).toHaveReturned(<Dashboard />)
-        // fireEvent.submit(button)
-        // render(<Dashboard />)
-        // expect(<Dashboard />).toHaveReturned()
-        // expect(screen.getByTestId('button')).toReturn(render(<Dashboard />))
-
     })
 
     test('Calls Login user with correct details', () => {
@@ -130,6 +122,31 @@ describe('Login page', () => {
         fireEvent.click(screen.getByTestId('login-button'))
         await sleepFor(1000)
         expect(setTokenMock).toBeCalled()
+    }) 
+
+    test('Checking if 200 status code is returned', async () => {
+        
+        const setTokenMock = jest.fn()
+        const { getByTestId } = render(<Logpage setToken={setTokenMock} />)
+        const emailField = getByTestId("email")
+        const passwordField = getByTestId("password")
+
+        fireEvent.change(emailField, { target: { value: 'admin@hello.world' } })
+        fireEvent.change(passwordField, { target: { value: 'cc' } })
+
+        global.fetch.mockImplementation(() => {
+            return Promise.resolve({
+                json: () => {
+                    return Promise.resolve('fdasf')
+                }
+            })
+        })                                       
+        
+        fireEvent.click(screen.getByTestId('login-button'))
+        await sleepFor(1000)
+        expect(response.statusCode).toBe(200)
+        expect(setTokenMock).toBeCalled()    
+        
     }) 
 })
 

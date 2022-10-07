@@ -25,7 +25,6 @@ export default function Logpage({ setToken }) {
     const handleSubmit = async e => {
 
         e.preventDefault();
-        // if (mail == 'admin@circles.asia' && Pass == 'cc') {
         const result = await loginUser({
             email: mail,
             password: Pass
@@ -36,15 +35,14 @@ export default function Logpage({ setToken }) {
         console.log('token : ', { status, responseBody })
 
 
-        if (result.status == 200) {
-            console.log('booom')
-        } else {
-            console.log('sad')
-        }
+        // if (result.status == 200) {
+        //     console.log('Successful')
+        // } else {
+        //     console.log('Try again')
+        // }
 
         setToken(responseBody.token);
     }
-    // }
 
     return (
         <form className='formContent' onSubmit={handleSubmit} action="/login" method="post">
@@ -82,6 +80,4 @@ Logpage.propTypes = {
     setToken: PropTypes.func.isRequired
 };
 
-
-// export default Logpage
 

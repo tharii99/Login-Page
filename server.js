@@ -2,9 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { request } = require('express');
 const app = express();
-const moment = require('moment');
 const bodyParser = require('body-parser'); // middleware
-// app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -20,14 +18,13 @@ app.post('/login', (req, res) => {
     console.log("HTTP Status : ",res.statusCode)
     
     res.status(200).send({
-      token : 'Success',
-      Time : moment().format("MMM Do YY")
+      token : Date.now(),
     })  
   }
   else{
     console.log("HTTP Status : ",res.statusCode)
     res.status(400).send({
-      message : 'Unsuccesful try again',
+      message : 'The details you entered does not match to any account in the Database',
       token : ''
     })
   }
