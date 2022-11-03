@@ -2,10 +2,15 @@ import React, { useState } from 'react'
 import { Button } from 'rebass'
 import { Input } from '@rebass/forms'
 import PropTypes from 'prop-types';
+import { login } from '../actions';
+import { useSelector, useDispatch } from 'react-redux'
+import { loginReducer } from '../counter/Reducer'
+import { connect } from 'react-redux';
+
 
 
 async function loginUser(credentials) {
-    console.log('Inside the login User function')
+    // console.log('Inside the login User function')
     return fetch('http://localhost:8080/login', {
         method: 'POST',
         headers: {
@@ -20,29 +25,40 @@ export default function Logpage({ setToken }) {
     const [mail, setMail] = useState('');       //Mail
     const [Pass, setPass] = useState('');       //Password
 
-
+    const dispatch = useDispatch();
     //form
     const handleSubmit = async e => {
 
         e.preventDefault();
+
         const result = await loginUser({
             email: mail,
             password: Pass
         });
+
         const status = result.status;
+
         const responseBody = await result.json()
 
-        console.log('token : ', { status, responseBody })
+        // connect(mapStateToProps)(Logpage)
+        dispatch(login(responseBody.token))
 
-
-        // if (result.status == 200) {
-        //     console.log('Successful')
-        // } else {
-        //     console.log('Try again')
-        // }
+        console.log('token : ', { status , responseBody })
 
         setToken(responseBody.token);
+
     }
+
+
+    const state = useSelector((token) => token)
+    if (state.loginReducer.token != null){
+        console.log("store : ", state.loginReducer);
+    }
+    // console.log("Rendering")
+
+
+    // const state = useSelector((token) => token);
+    // console.log("store : ",state.loginReducer);
 
     return (
         <form className='formContent' onSubmit={handleSubmit} action="/login" method="post">
@@ -71,9 +87,7 @@ export default function Logpage({ setToken }) {
             </div>
             <Button variant='primary' data-testid='login-button' className='btn' type='submit'>Login</Button>
         </form>
-
     )
-
 }
 
 Logpage.propTypes = {
@@ -81,3 +95,11 @@ Logpage.propTypes = {
 };
 
 
+
+const mapStateToProps = (state) => {
+    return {
+      setToken: state.loginReducer
+    };
+ };
+
+    connect(mapStateToProps)(Logpage)

@@ -120,7 +120,7 @@ describe('Login page', () => {
             })
         })
         fireEvent.click(screen.getByTestId('login-button'))
-        await sleepFor(1000)
+        await sleepFor(1000) //1000 = 1 Second
         expect(setTokenMock).toBeCalled()
     }) 
 
@@ -144,6 +144,7 @@ describe('Login page', () => {
         
         fireEvent.click(screen.getByTestId('login-button'))
         await sleepFor(1000)
+        //Statuscode 200 means success
         expect(response.statusCode).toBe(200)
         expect(setTokenMock).toBeCalled()    
         

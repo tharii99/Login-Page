@@ -42,6 +42,7 @@
     "@prismicio/react": "^2.5.0",
     "@rebass/forms": "^4.0.6",
     "@rebass/preset": "^4.0.5",
+    "@reduxjs/toolkit": "^1.8.6",
     "body-parser": "^1.20.0",
     "emotion-theming": "^11.0.0",
     "jest-environment-jsdom": "^29.0.3",
@@ -49,7 +50,9 @@
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.4",
     "react-router-dom": "^6.3.0",
-    "rebass": "^4.0.7"
+    "rebass": "^4.0.7",
+    "redux": "^4.2.0"
   }
 }
