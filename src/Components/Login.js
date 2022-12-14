@@ -2,23 +2,8 @@ import React, { useState } from 'react'
 import { Button } from 'rebass'
 import { Input } from '@rebass/forms'
 import PropTypes from 'prop-types';
-import { login } from '../actions';
-import { useSelector, useDispatch } from 'react-redux'
-import { loginReducer } from '../counter/Reducer'
-import { connect } from 'react-redux';
-
-
-
-async function loginUser(credentials) {
-    // console.log('Inside the login User function')
-    return fetch('http://localhost:8080/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentials)
-    })
-}
+import { userFetch } from '../actions';
+import { useDispatch } from 'react-redux'
 
 export default function Logpage({ setToken }) {
 
@@ -31,34 +16,18 @@ export default function Logpage({ setToken }) {
 
         e.preventDefault();
 
-        const result = await loginUser({
+        const result = ({
             email: mail,
             password: Pass
-        });
+        })
 
-        const status = result.status;
-
-        const responseBody = await result.json()
-
-        // connect(mapStateToProps)(Logpage)
-        dispatch(login(responseBody.token))
-
-        console.log('token : ', { status , responseBody })
-
-        setToken(responseBody.token);
-
+        const checkIn = dispatch(userFetch(result))
+        const token = localStorage.getItem('token');
+        console.log("store : ", token);
+        setToken(token);
     }
 
 
-    const state = useSelector((token) => token)
-    if (state.loginReducer.token != null){
-        console.log("store : ", state.loginReducer);
-    }
-    // console.log("Rendering")
-
-
-    // const state = useSelector((token) => token);
-    // console.log("store : ",state.loginReducer);
 
     return (
         <form className='formContent' onSubmit={handleSubmit} action="/login" method="post">
@@ -96,10 +65,4 @@ Logpage.propTypes = {
 
 
 
-const mapStateToProps = (state) => {
-    return {
-      setToken: state.loginReducer
-    };
- };
 
-    connect(mapStateToProps)(Logpage)

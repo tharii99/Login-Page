@@ -1,8 +1,15 @@
-import { LOGIN } from "./actionTypes"
+import { LOGIN,SAVELOG,LOGIN_USER_SUCCESS } from "./actionTypes"
 
-export const login = (token) => {
+// export const loginUserSuccess = (token) => {
+//     return{
+//         type: LOGIN_USER_SUCCESS,
+//         payload:token
+//     }
+// }
+
+export const userFetch = (payload) => {
     return{
-        type: LOGIN,
-        payload:token
+        type:SAVELOG,
+        payload:payload
     }
 }

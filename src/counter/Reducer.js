@@ -1,5 +1,5 @@
 
-import { LOGIN } from "../actionTypes";
+import { LOGIN_USER_SUCCESS,LOGIN_USER_FAIL } from "../actionTypes";
 
 const initialState = {
     token:null
@@ -8,9 +8,10 @@ const initialState = {
 
 export const loginReducer = function (state = initialState,action){
     switch(action.type) {
-        case LOGIN:
+        case LOGIN_USER_SUCCESS:
             return {...state,token: action.payload};
-
+        case LOGIN_USER_FAIL:
+            return {...state,token: action.payload};
         default:
             return state;    
     }

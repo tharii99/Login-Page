@@ -6,7 +6,7 @@ import './index.css';
 import Logpage from './Components/Login';
 import Dashboard from './Components/Dashboard';
 import { Provider } from 'react-redux';
-import { store } from '../src/store';
+import  store  from '../src/store';
 
 
 const HelloWorld = () => {
